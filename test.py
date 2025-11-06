@@ -1,3 +1,5 @@
+
+
 # Functions to be tested
 
 # general stats
@@ -147,18 +149,57 @@ def getInfoFromFile(file):
 
 
 
- #? Funciones para almacenar la informacion en estructuras de datos
+
+
+ #? Funciones para almacenar la informacion en estructuras de datos -----------------------------------------------------------------------------------------------------------
+
 
 def proccessStationsInfo(lines):
-    return lines 
+  
+  stations = {}
+
+# Recorremos cada linea del archivo a partir de la primera linea
+# En cada Linea se van a crear un array con las data dividida
+# Asignamos a el objeto cada posicion del array a su respectiva llave en el diccionario
+  for line in lines[1:]:
+      
+      data = line.split(',')
+      data[3] = data[3].strip() # Eliminamos el salto de linea del final de la linea
+
+      stations[data[1]] = { 'name': data[0], 'coordinates': [float(data[2]), float(data[3])] }
+
+  return stations
+
+
+
+
 
 def proccessMetroLog(lines):
-    return lines
 
-data = getInfoFromFile('stations.info')
+    user_activity = {}
+
+    for line in lines[1:]:
+        data = line.split() # Split elimina los espacios en blanco y saltos de linea y crea un array con la data dividida
+        # data[3] = data[3].strip() # Eliminamos el salto de linea del final de la linea  // Omitiremos esta linea ya que usamos el split sin parametros
+
+        user_id = data[1]
+        event_type = data[3]
+        event_time = data[2]
+        station_id = data[0]
+
+        # Si el usuario no existe en el diccionario, lo creamos con una lista vacía
+        if user_id not in user_activity:
+            user_activity[user_id] = []
+
+        # Agregamos el nuevo evento a su lista
+        user_activity[user_id].append((event_type, event_time, station_id))
+
+    return user_activity
+
+
+
+data = getInfoFromFile('metro.log')
 print(data)
-
-
 
 
 
@@ -172,7 +213,7 @@ print(data)
 #     }
 # }
 
-#! Estructura de datos para Informacion de estaciones
+#! Estructura de datos para Informacion de estaciones 
 
 # user_activity = {
 #     '69253198': [

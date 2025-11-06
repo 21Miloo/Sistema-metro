@@ -58,6 +58,9 @@ systemMetroStats()
 
 # Estadísticas por estación
 def numberTripsStation(station_id):  # número de viajes realizados en una estación
+
+    
+
     pass
 
 
