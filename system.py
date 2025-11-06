@@ -38,3 +38,33 @@ def geodistance(P1,P2):
     #Cálculo de la distancia euclidiana entre los dos puntos
     D=((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)**(1/2)
     return D
+
+
+
+# Estadísticas generales del sistema
+def totalUsersMetro():  # número total de usuarios en sistema metro
+    pass
+
+
+def numberTripsMetro():  # número total de viajes realizados
+    pass
+
+
+def rushHourMetro():  # hora pico del sistema metro
+    pass
+
+
+def totalRevenueMetro():  # ingresos totales del sistema
+    pass
+
+
+def mostPopularRoutesMetro():  # rutas más populares del sistema metro
+    pass
+
+
+def averageDistanceMetro():  # distancia promedio de viaje en el sistema metro
+    pass
+
+
+def averageTripsMetro():  # número promedio de viajes por usuario
+    pass
