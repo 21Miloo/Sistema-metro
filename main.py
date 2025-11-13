@@ -1,5 +1,4 @@
-
-# Juan Camilo Lopez 
+# Juan Camilo Lopez
 # Grupo 8
 
 # Facultad de Ingenieria
@@ -15,8 +14,8 @@ from stations import *  ## Cargamos todas las funciones del modulo stations.py
 
 
 # Cargamos los datos
-stations = getInfoFromFile("data/stations.info") # Cargamos la informacion de las estaciones desde el archivo .info
-user_activity, station_activity = getInfoFromFile("data/metro_100k.log") # Cargamos la informacion de la actividad del metro desde el archivo .log
+stations = getInfoFromFile("data/stations.info")
+user_activity, station_activity = getInfoFromFile("data/metro_100k.log")
 
 
 # ---------------------Funciones a Invocar------------------------------
@@ -41,7 +40,7 @@ def systemMetroStats():
 
         option = input(
             "Opcion: "
-        ).strip()  ## Se usa el input dentro del while para que se pida la opcion cada vez que se itere el ciclo y no se quede con la misma opcion anterior
+        ).strip()  # Strip elimina espacios en blanco al inicio y al final
 
         if option == "1":
             totalUsersMetro(user_activity)
@@ -70,7 +69,6 @@ def systemMetroStats():
 
 
 def menuStationStats():
-
 
     while flag:
 
@@ -109,9 +107,6 @@ def menuStationStats():
             print("\n Opción inválida. Intente de nuevo.")
 
 
-
-
-
 # ---------------------Menu Principal------------------------------
 # Punto de entrada del programa
 
@@ -136,6 +131,3 @@ while True:
         break
     else:
         print("\n Opción inválida. Intente de nuevo.")
-
-
-        

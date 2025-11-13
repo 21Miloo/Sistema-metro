@@ -62,8 +62,7 @@ def totalUsersMetro(user_activity) -> int:  # número total de usuarios en siste
 
 
 def numberTripsMetro(user_activity) -> int:  # número total de viajes realizados
-
-    ''' Funcion que calcula el numero total de viajes realizados '''
+    """Funcion que calcula el numero total de viajes realizados"""
 
     trips = 0
 
@@ -82,10 +81,6 @@ def numberTripsMetro(user_activity) -> int:  # número total de viajes realizado
 ## hora pico del sistema metro
 def rushHourMetro(user_activity) -> None:
     """Función que calcula la hora pico más recurrente en el sistema metro."""
-
-    # Debemos de contar la hora que mas se repite por casa usuario. NO importa la estacion
-
-    # 1 Accedemos a la lista de cada usuario
 
     hours = []
     for user, logs in user_activity.items():
@@ -125,12 +120,8 @@ def rushHourMetro(user_activity) -> None:
 # ----------------------------------------------------------------------------------
 
 
-def totalRevenueMetro(
-    user_activity, cost_per_trip=3500
-) -> int:  # ingresos $ totales del sistema
+def totalRevenueMetro(user_activity, cost_per_trip=3500) -> int:
     """Función que calcula los ingresos totales del sistema metro."""
-
-    # Nuestra funcion numero de viajes ya nos retorna el numero de viajes realizados, por lo tanto no es necesario volver a contarlos. solo lo multiplicamos por el costo por viaje. que tendra valor por defecto 3500.
 
     total_revenue = numberTripsMetro(user_activity) * cost_per_trip
 
@@ -145,7 +136,7 @@ def totalRevenueMetro(
 def mostPopularRoutesMetro(station_activity) -> None:
     """Función que identifica las rutas más populares en el sistema metro."""
 
-    stations = {}  # Debe ser un diccionario, no una lista
+    stations = {}
 
     # Contamos los eventos por estación
     for station, logs in station_activity.items():
@@ -156,7 +147,6 @@ def mostPopularRoutesMetro(station_activity) -> None:
         print("\nNo hay actividad registrada en las estaciones.")
         return
 
-    # Buscamos el valor máximo
     max_count = max(
         stations.values()
     )  # Guardamos el valor máximo de entradas (El numero que mas se repite)
@@ -167,7 +157,9 @@ def mostPopularRoutesMetro(station_activity) -> None:
             print(f"{station} con {max_count} Usuarios.")
 
 
-def averageDistanceMetro(user_activity, stations) -> float:  # distancia promedio de viaje en el sistema metro
+def averageDistanceMetro(
+    user_activity, stations
+) -> float:  # distancia promedio de viaje en el sistema metro
     """
     Calcula la distancia promedio por viaje en todo el sistema.
     - Un viaje se considera como un par IN -> OUT del mismo usuario.
@@ -185,15 +177,15 @@ def averageDistanceMetro(user_activity, stations) -> float:  # distancia promedi
             event_type = event[0]
             station_id = event[2]
 
-            if event_type == 'IN' and origin_station_id is None:
+            if event_type == "IN" and origin_station_id is None:
                 origin_station_id = station_id
-            elif event_type == 'OUT' and origin_station_id is not None:
+            elif event_type == "OUT" and origin_station_id is not None:
                 destination_station_id = station_id
 
                 # Verificamos que existan ambas estaciones en el diccionario 'stations'
                 if origin_station_id in stations and destination_station_id in stations:
-                    origin_coords = stations[origin_station_id]['coordinates']
-                    dest_coords = stations[destination_station_id]['coordinates']
+                    origin_coords = stations[origin_station_id]["coordinates"]
+                    dest_coords = stations[destination_station_id]["coordinates"]
                     distance_m = geodistance(origin_coords, dest_coords)
                     total_distance_m += distance_m
                     total_trips += 1
@@ -202,12 +194,16 @@ def averageDistanceMetro(user_activity, stations) -> float:  # distancia promedi
                 origin_station_id = None
 
     if total_trips == 0:
-        print("\nNo se encontraron viajes completos para calcular la distancia promedio.")
+        print(
+            "\nNo se encontraron viajes completos para calcular la distancia promedio."
+        )
         return 0.0
 
     average_m = total_distance_m / total_trips
     average_km = average_m / 1000.0
-    print(f"\nDistancia promedio por viaje: {average_m:.2f} m ({average_km:.2f} km) en {total_trips} viajes")
+    print(
+        f"\nDistancia promedio por viaje: {average_m:.2f} m ({average_km:.2f} km) en {total_trips} viajes"
+    )
     return average_m
 
 
@@ -232,13 +228,3 @@ def averageTripsMetro(user_activity) -> int:
     print("\nNúmero promedio de viajes por usuario:", avg)
 
     return avg
-
-
-# Estructura de datos requeridas para las funciones ----------------------------------------------------------
-
-# user_activity = {
-#     '69253198': [
-#         ('IN', '04:03', '010'),
-#         ('OUT', '04:25', '018'),
-#     ]
-# }
